@@ -1,0 +1,45 @@
+ab -c100 -n1000 http://127.0.0.1:7777/
+
+tornado_motor.py
+Requests per second: 140.18
+
+tornado_motor_fork.py
+Requests per second: 181.83
+
+tornado_asyncmongo.py
+Requests per second: 521.13
+
+tornado_asyncmongo_fork.py
+Requests per second: 405.41
+
+wsgi_gevent.py
+Requests per second: 394.11
+
+node_mongodb.js
+Requests per second: 758.53
+
+node_mongodb_fork.js
+Requests per second: 769.34
+
+ab -c100 -n10000 http://127.0.0.1:7777/
+
+tornado_motor.py
+Requests per second: 140.38
+
+tornado_motor_fork.py
+Requests per second: 194.50
+
+tornado_asyncmongo.py
+Requests per second: 614.88
+
+tornado_asyncmongo_fork.py
+Requests per second: 430.63
+
+wsgi_gevent.py
+Requests per second: 409.74
+
+node_mongodb.js
+Requests per second: 824.44
+
+node_mongodb_fork.js
+Requests per second: 915.72
