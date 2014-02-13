@@ -7,10 +7,10 @@ tornado_motor_fork.py
 Requests per second: 181.83
 
 tornado_asyncmongo.py
-Requests per second: 521.13
+Requests per second: 405.41
 
 tornado_asyncmongo_fork.py
-Requests per second: 405.41
+Requests per second: 521.13
 
 wsgi_gevent.py
 Requests per second: 394.11
@@ -30,10 +30,10 @@ tornado_motor_fork.py
 Requests per second: 194.50
 
 tornado_asyncmongo.py
-Requests per second: 614.88
+Requests per second: 430.63
 
 tornado_asyncmongo_fork.py
-Requests per second: 430.63
+Requests per second: 614.88
 
 wsgi_gevent.py
 Requests per second: 409.74

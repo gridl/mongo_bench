@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import tornado.web
 import tornado.ioloop
-import tornado.httpserver
 import asyncmongo
 
 
@@ -39,8 +38,6 @@ if __name__ == '__main__':
         ]
     )
 
-    server = tornado.httpserver.HTTPServer(application)
-    server.bind(7777)
-    server.start(2)
+    application.listen(7777)
 
     tornado.ioloop.IOLoop.instance().start()
