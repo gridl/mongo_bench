@@ -21,6 +21,9 @@ Requests per second: 758.53
 node_mongodb_fork.js
 Requests per second: 769.34
 
+wsgi_meinheld.py
+Requests per second: 658.66
+
 ab -c100 -n10000 http://127.0.0.1:7777/
 
 tornado_motor.py
@@ -43,3 +46,6 @@ Requests per second: 824.44
 
 node_mongodb_fork.js
 Requests per second: 915.72
+
+wsgi_meinheld.py
+Requests per second: 617.75
