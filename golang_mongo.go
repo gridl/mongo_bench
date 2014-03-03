@@ -1,29 +1,29 @@
 package main
 
 import (
-        "fmt"
-        "labix.org/v2/mgo"
-        "labix.org/v2/mgo/bson"
-        "log"
-        "net/http"
-        "runtime"
+    "fmt"
+    "labix.org/v2/mgo"
+    "labix.org/v2/mgo/bson"
+    "log"
+    "net/http"
+    "runtime"
 )
 
 type Data struct {
-	Data string
+    Data string
 }
 
 var session *mgo.Session
 
 func main() {
 
-	// runtime.GOMAXPROCS(runtime.NumCPU())
-    runtime.GOMAXPROCS(1)
+    // runtime.GOMAXPROCS(runtime.NumCPU())
+    runtime.GOMAXPROCS(4)
 
-	var err error
+    var err error
     session, err = mgo.Dial("127.0.0.1")
     if err != nil {
-            panic(err)
+        panic(err)
     }
     defer session.Close()
 
@@ -32,15 +32,15 @@ func main() {
 
     c := session.DB("documents").C("items")
     query := bson.M{}
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		result := Data{}
-	    err = c.Find(query).One(&result)
-	    if err != nil {
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        result := Data{}
+        err = c.Find(query).One(&result)
+        if err != nil {
             panic(err)
-	    }
-		fmt.Fprintf(w, "%s", result.Data)
-	})
+        }
+        fmt.Fprintf(w, "%s", result.Data)
+    })
 
-    log.Fatal(http.ListenAndServe(":8080", nil))
+    log.Fatal(http.ListenAndServe("127.0.0.1:7777", nil))
 }
 

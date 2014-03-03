@@ -6,14 +6,9 @@ import motor
 
 
 class IndexRequestHandler(tornado.web.RequestHandler):
-    _db = None
-
     @property
     def db(self):
-        if self._db is None:
-            self._db = motor.MotorClient().open_sync()['documents']
-
-        return self._db
+        return self.settings['db']
 
     @tornado.web.asynchronous
     def get(self):
@@ -36,6 +31,8 @@ if __name__ == '__main__':
 
     server = tornado.httpserver.HTTPServer(application)
     server.bind(7777)
-    server.start(2)
+    server.start(4)
+
+    application.settings['db'] = motor.MotorClient().open_sync()['documents']
 
     tornado.ioloop.IOLoop.instance().start()

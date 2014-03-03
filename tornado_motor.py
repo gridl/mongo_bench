@@ -5,14 +5,9 @@ import motor
 
 
 class IndexRequestHandler(tornado.web.RequestHandler):
-    _db = None
-
     @property
     def db(self):
-        if self._db is None:
-            self._db = motor.MotorClient().open_sync()['documents']
-
-        return self._db
+        return self.settings['db']
 
     @tornado.web.asynchronous
     def get(self):
@@ -27,10 +22,13 @@ class IndexRequestHandler(tornado.web.RequestHandler):
 
 
 if __name__ == '__main__':
+    db = motor.MotorClient().open_sync()['documents']
+
     application = tornado.web.Application(
         [
             (r'/', IndexRequestHandler)
-        ]
+        ],
+        db=db
     )
 
     application.listen(7777)

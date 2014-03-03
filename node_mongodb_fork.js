@@ -4,6 +4,8 @@ var cluster = require('cluster');
 if (cluster.isMaster) {
   cluster.fork();
   cluster.fork();
+  cluster.fork();
+  cluster.fork();
 } else {
   var http = require('http');
   var MongoClient = require('mongodb').MongoClient;

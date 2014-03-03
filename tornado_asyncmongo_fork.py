@@ -6,19 +6,9 @@ import asyncmongo
 
 
 class IndexRequestHandler(tornado.web.RequestHandler):
-    _db = None
-
     @property
     def db(self):
-        if self._db is None:
-            self._db = asyncmongo.Client(
-                host='127.0.0.1',
-                port=27017,
-                pool_id='documents',
-                dbname='documents'
-            )
-
-        return self._db
+        return self.settings['db']
 
     @tornado.web.asynchronous
     def get(self):
@@ -33,14 +23,22 @@ class IndexRequestHandler(tornado.web.RequestHandler):
 
 
 if __name__ == '__main__':
+    db = asyncmongo.Client(
+        host='127.0.0.1',
+        port=27017,
+        pool_id='documents',
+        dbname='documents'
+    )
+
     application = tornado.web.Application(
         [
             (r'/', IndexRequestHandler)
-        ]
+        ],
+        db=db
     )
 
     server = tornado.httpserver.HTTPServer(application)
     server.bind(7777)
-    server.start(2)
+    server.start(4)
 
     tornado.ioloop.IOLoop.instance().start()
